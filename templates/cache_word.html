@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyMCE 编辑器演示</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 注意：tinymce@7 包里 tinymce.min.js 在根目录，不在 dist/ 下（dist/ 路径会 404） -->
+    <script src="https://cdn.jsdelivr.net/npm/tinymce@7/tinymce.min.js"></script>
+    <script>
+    // 必须等 DOM 加载完成再 init，否则此时 #editor 还不存在，编辑器不会出现
+    document.addEventListener('DOMContentLoaded', function () {
+        tinymce.init({
+            selector: '#editor',
+            language: 'zh_CN',                // 中文界面（语言包从 CDN 引入，加载失败会自动回退英文）
+            language_url: 'https://cdn.jsdelivr.net/npm/tinymce-i18n@latest/langs7/zh_CN.js',
+            license_key: 'gpl',               // 自托管 GPL 用法，避免评估模式提示
+            promotion: false,                 // 去掉工具栏里的 "Upgrade" 推广按钮
+            plugins: 'lists table',           // 列表、表格——实验报告常用
+            // 字体下拉框默认没有中文字体，这里手动加上
+            font_family_formats: '微软雅黑=Microsoft YaHei;宋体=SimSun;黑体=SimHei;楷体=KaiTi;Arial=arial,helvetica,sans-serif;Times New Roman=times new roman,serif',
+            toolbar: 'undo redo | fontfamily fontsize blocks | bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist | table | removeformat',
+            height: 400,
+        });
+    });
+    </script>
+</head>
+<body>
+    <div class="container mt-4" style="max-width: 900px;">
+        <h1 class="mb-3">📝 TinyMCE 编辑器演示</h1>
+        <p class="text-body-secondary">这就是 Word「开始」选项卡风格的工具栏：字体、字号、加粗斜体、颜色、对齐、列表、表格。</p>
+
+        <!-- TinyMCE 会把这个 textarea 替换成可视化编辑器 -->
+        <textarea id="editor">初始内容：试着选中这段文字，用上方工具栏改字体、字号、加粗。</textarea>
+
+        <div class="mt-3">
+            <button type="button" class="btn btn-primary" onclick="showHtml()">查看当前 HTML</button>
+        </div>
+        <pre id="html-output" class="mt-3 p-3 bg-light border rounded" style="display:none; white-space: pre-wrap;"></pre>
+    </div>
+
+    <script>
+        // 演示辅助：把编辑器当前内容以 HTML 形式展示出来
+        function showHtml() {
+            var content = tinymce.get('editor').getContent();
+            var out = document.getElementById('html-output');
+            out.textContent = content;
+            out.style.display = 'block';
+        }
+    </script>
+
+    <!-- <div class="btn-toolbar gap-1 mb-2">
+        <select onchange="document.execCommand('fontName', false, this.value)">
+            <option>宋体</option><option>黑体</option><option value="Times New Roman">Times New Roman</option>
+        </select>
+        <select onchange="document.execCommand('fontSize', false, this.value)">
+            <option value="3">正常</option><option value="5">大</option><option value="6">特大</option>
+        </select>
+        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="document.execCommand('bold')"><b>B</b></button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="document.execCommand('italic')"><i>I</i></button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="document.execCommand('underline')"><u>U</u></button>
+    </div> -->
+    <!-- <div id="editor" contenteditable="true" class="form-control" style="height:400px; overflow:auto;">
+        {{ ai_text | default('等待生成...') }}   
+    </div> -->
+
+
+</body>
+

@@ -1,0 +1,31 @@
+body {
+    font-family:"Microsoft YaHei" , Arial;
+    background-color: #f8f9fa;
+}
+
+/* div .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} */
+
+/* 登录/注册页共用的外层容器：距浏览器窗口顶部、底部各 25px，
+   卡片在剩余空间内垂直水平居中（注册页直接复用同一个 class） */
+.auth-wrapper {
+    min-height: calc(100vh - 50px);   /* 整屏高度减去上下两段 25px，保证不出现滚动条 */
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: flex;                    /* 以下三行 = 原来的 d-flex + 两个居中工具类 */
+    align-items: center;
+    justify-content: center;
+}
+
+/* 错误提示盒子统一覆写：文字左对齐 + 字号小一圈（0.8rem ≈ 13px，正文标准 1rem = 16px） */
+.alert.alert-danger {
+    text-align: left;
+    font-size: 0.8rem;
+
+}

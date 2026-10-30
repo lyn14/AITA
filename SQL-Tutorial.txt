@@ -1,0 +1,5 @@
+我的SQL在docker里，端口是3306（默认），容器名是my-mysql；
+建立容器的命令是：docker run --name my-mysql -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql:8.0
+此时若没有安装mysql的镜像，那么docker会自动下载；下载完成后，打开docker，便可以看到my-mysql这个容器。
+但是我们没有设置开关机策略，这可以通过在上面的命令中添加”--restart unless-stopped“来实现，也可以通过每次输入”docker start my-mysql“来启动，也可以进入docker手动启动。
+在确认容器开机之后，我们启动它：docker exec -it my-mysql mysql -p，然后输入密码123456，即可进入mysql数据库。

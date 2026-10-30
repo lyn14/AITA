@@ -1,0 +1,15 @@
+# 虚拟环境：体积大且平台相关，用 pip install -r requirements.txt 重建
+venv/
+.venv/
+
+# Python 字节码缓存
+__pycache__/
+*.py[cod]
+
+# 环境变量 / 密钥（PARATERA_API_KEY、SECRET_KEY 等），绝不入库
+.env
+.env.*
+
+# 编辑器与系统垃圾文件
+.DS_Store
+Thumbs.db
